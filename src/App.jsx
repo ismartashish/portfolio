@@ -29,13 +29,10 @@ function Header() {
       <header className="header-simple">
         <div className="header-left">
           <h1>Ashish Kumar Jha</h1>
-          <p>MERN Stack Developer • AI Engineer • GenAI & Prompt Engineering </p>
+          <p>MERN Stack Developer • AI Engineer • GenAI & Prompt Engineering</p>
         </div>
 
-        <div
-          className="hamburger-menu"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
+        <div className="hamburger-menu" onClick={() => setMenuOpen(!menuOpen)}>
           <div className="bar" />
           <div className="bar" />
           <div className="bar" />
@@ -51,11 +48,12 @@ function Header() {
           "Tools",
           "Projects",
           "Achievements",
+          "Extra-Curricular",
           "Contact"
         ].map(item => (
           <a
             key={item}
-            href={`#${item.toLowerCase()}`}
+            href={`#${item.toLowerCase().replace(" ", "-")}`}
             onClick={() => setMenuOpen(false)}
           >
             {item}
@@ -63,41 +61,40 @@ function Header() {
         ))}
       </nav>
 
-      {menuOpen && (
-        <div className="overlay" onClick={() => setMenuOpen(false)} />
-      )}
+      {menuOpen && <div className="overlay" onClick={() => setMenuOpen(false)} />}
     </>
   );
 }
+
+/* ================= CONTACT FORM ================= */
 function ContactForm() {
-  const [sent, setSent] = React.useState(false);
+  const [sent, setSent] = useState(false);
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const formData = {
-    name: e.target[0].value,
-    email: e.target[1].value,
-    message: e.target[2].value
-  };
+    const formData = {
+      name: e.target[0].value,
+      email: e.target[1].value,
+      message: e.target[2].value
+    };
 
-  try {
-    const res = await fetch("https://new-portfolio-backend-xdn4.onrender.com/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData)
-    });
+    try {
+      const res = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
 
-    if (res.ok) {
-      setSent(true);
-      e.target.reset();
-      setTimeout(() => setSent(false), 4000);
+      if (res.ok) {
+        setSent(true);
+        e.target.reset();
+        setTimeout(() => setSent(false), 4000);
+      }
+    } catch (err) {
+      console.error(err);
     }
-  } catch (err) {
-    console.error(err);
-  }
-};
-
+  };
 
   return (
     <>
@@ -108,15 +105,10 @@ function ContactForm() {
         </div>
 
         <textarea placeholder="Your Message" rows="5" required />
-
         <button type="submit">Send Message</button>
       </form>
 
-      {sent && (
-        <p className="success-message">
-          ✅ Message sent successfully!
-        </p>
-      )}
+      {sent && <p className="success-message">✅ Message sent successfully!</p>}
     </>
   );
 }
@@ -133,29 +125,84 @@ export default function App() {
           className="hero-left"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8 }}
         >
           <p className="hero-badge">👋 Welcome to my world</p>
 
           <h1>
             I build <span>Web Apps</span>
-            <br />
-            & Automate the System 💻
+            <br />& Automate Systems 💻
           </h1>
 
           <p className="hero-desc">
-            I’m a MERN stack developer focused on building clean, scalable,
-            and user-friendly web applications with a touch of intelligence 🚀
+            I’m a MERN Stack Developer passionate about building clean, scalable,
+            and intelligent web applications 🚀
           </p>
 
           <div className="hero-tools">
             <span>🛠 Tools I use daily</span>
-            <div className="tool-icons">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" />
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" />
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" />
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" />
-            </div>
+           <div className="tool-icons">
+  {/* Core Stack */}
+  <img
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+    alt="React"
+    title="React.js"
+  />
+
+  <img
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+    alt="Node.js"
+    title="Node.js"
+  />
+
+  <img
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+    alt="MongoDB"
+    title="MongoDB"
+  />
+
+  {/* Developer Tools */}
+  <img
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"
+    alt="VS Code"
+    title="Visual Studio Code"
+  />
+
+  <img
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+    alt="Git"
+    title="Git"
+  />
+
+  <img
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+    alt="GitHub"
+    title="GitHub"
+  />
+
+  {/* AI & Deployment */}
+  <img
+    src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/openai.svg"
+    alt="ChatGPT"
+    title="ChatGPT"
+    style={{ filter: "invert(1)" }}
+  />
+
+  <img
+    src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/vercel.svg"
+    alt="Vercel"
+    title="Vercel"
+    style={{ filter: "invert(1)" }}
+  />
+
+  <img
+    src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/render.svg"
+    alt="Render"
+    title="Render"
+    style={{ filter: "invert(1)" }}
+  />
+</div>
+
           </div>
         </motion.div>
 
@@ -163,90 +210,57 @@ export default function App() {
           className="hero-right"
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
+          transition={{ duration: 1 }}
         >
-          <motion.img
-            src={myPhoto}
-            alt="Profile"
-            className="hero-photo main"
-            initial={{ rotate: -12, scale: 0.9 }}
-            animate={{ rotate: -6, scale: 1 }}
-            transition={{ duration: 1 }}
-          />
-
-          <motion.img
-            src={myPhoto}
-            alt="Preview"
-            className="hero-photo secondary"
-            initial={{ rotate: 12, scale: 0.9 }}
-            animate={{ rotate: 6, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-          />
+          <img src={myPhoto} alt="Profile" className="hero-photo main" />
+          <img src={myPhoto} alt="Preview" className="hero-photo secondary" />
         </motion.div>
       </section>
 
       {/* ================= ABOUT ================= */}
-      <motion.section
-        id="about"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
+      <section id="about">
         <h2>About Me</h2>
         <p>
-          I'm a passionate MERN stack developer who enjoys building efficient,
-          scalable, and user-friendly web applications.
+          I am a passionate MERN Stack Developer focused on creating efficient,
+          scalable, and user-centric web applications.
         </p>
         <p>
-          I aim to combine full-stack development with intelligent automation
-          and AI to create impactful solutions.
+          I aim to blend full-stack development with AI-driven automation to
+          build impactful digital solutions.
         </p>
-      </motion.section>
+      </section>
 
       {/* ================= EDUCATION ================= */}
-      <motion.section
-        id="education"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
+      <section id="education">
         <h2>Education</h2>
         <div className="education-list">
           <div className="education-card">
-            <h3>Class 10th</h3>
+            <h3>Class 10</h3>
             <p>Jagriti Vidyapeeth High School</p>
             <p>2021</p>
           </div>
           <div className="education-card">
-            <h3>Class 12th</h3>
+            <h3>Class 12</h3>
             <p>Patha Bhavan, Kolkata</p>
             <p>2023</p>
           </div>
           <div className="education-card">
             <h3>B.Tech</h3>
             <p>UEM Jaipur</p>
-            <p>Ongoing</p>
+            <p>Currently Pursuing</p>
           </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* ================= EXPERIENCE ================= */}
-      <motion.section
-        id="experience"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
+      <section id="experience">
         <h2>Experience</h2>
         <div className="experience-list">
           <div className="experience-card">
             <h3>Personal Projects</h3>
             <p>
-              Built MERN applications including portfolio websites, REST APIs,
-              and real-time chat apps.
+              Built multiple MERN stack applications including portfolio
+              websites, REST APIs, and real-time chat systems.
             </p>
           </div>
           <div className="experience-card">
@@ -254,16 +268,10 @@ export default function App() {
             <p>Actively seeking real-world development opportunities.</p>
           </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* ================= SKILLS ================= */}
-      <motion.section
-        id="skills"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
+      <section id="skills">
         <h2>Skills</h2>
         <div className="skills-list">
           <div className="skill-card"><FaReact size={40} /><h3>React</h3></div>
@@ -274,16 +282,10 @@ export default function App() {
           <div className="skill-card"><SiPython size={40} /><h3>Python</h3></div>
           <div className="skill-card"><SiMysql size={40} /><h3>SQL</h3></div>
         </div>
-      </motion.section>
+      </section>
 
       {/* ================= TOOLS ================= */}
-      <motion.section
-        id="tools"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
+      <section id="tools">
         <h2>Tools</h2>
         <div className="tools-list">
           <div className="tool-card"><FaGitAlt size={40} /><h3>Git</h3></div>
@@ -291,86 +293,91 @@ export default function App() {
           <div className="tool-card"><DiVisualstudio size={40} /><h3>VS Code</h3></div>
           <div className="tool-card"><SiChatbot size={40} /><h3>ChatGPT</h3></div>
         </div>
-      </motion.section>
+      </section>
 
       {/* ================= PROJECTS ================= */}
-      <motion.section
-        id="projects"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
+      <section id="projects">
         <h2>Projects</h2>
         <div className="project-list">
           <div className="project-card">
-            <h3>Portfolio Website</h3>
-            <p>Personal portfolio built using React.</p>
-            <a href="https://github.com/ismartashish/portfolio" target="_blank">
-              View Code
-            </a>
+            <h3>To-Do Application</h3>
+            <p>MERN-based task manager with authentication and REST APIs.</p>
+            <a href="https://to-do-frontend-roan-phi.vercel.app">Check Out</a>
           </div>
           <div className="project-card">
-            <h3>Chat Application</h3>
-            <p>Real-time chat app using MERN & Socket.IO.</p>
-            <a href="#">Ongoing</a>
+            <h3>Bharat Tradition</h3>
+            <p>
+              A digital initiative showcasing India’s cultural heritage through
+              a modern web platform.
+            </p>
+            <a href="https://traditionalfrontend.vercel.app">Check Out</a>
           </div>
-          <div className="project-card">
-            <h3>To-Do</h3>
-            <p>A MERN stack To-Do app that simplifies task tracking with an intuitive interface and efficient backend handling.</p>
-            <a href="https://whattoodoo.netlify.app/">Check Out</a>
-          </div>
-          <div className="project-card">
-            <h3>Bharat Tredition</h3>
-            <p>Bharat Tradition is a digital initiative that brings India’s rich traditions and cultural values to the modern web world.</p>
-            <a href="https://bharat-tradition.netlify.app/">Check Out</a>
-          </div>
-
         </div>
-      </motion.section>
+      </section>
 
       {/* ================= ACHIEVEMENTS ================= */}
-      <motion.section
-        id="achievements"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <h2>Achievements</h2>
+      <section id="achievements">
+        <h2>Achievements 🏅</h2>
         <div className="achievement-list">
           <div className="achievement-card">
-            <h3>IEEE Research Paper</h3>
+            <h3>📄 IEEE Research Paper</h3>
             <p>
-              Published research paper on FPGA-based vehicle accident reporting
-              system in IEEE Xplore.
+              Published a research paper on an FPGA-based vehicle accident
+              reporting system, officially indexed in IEEE Xplore.
             </p>
-            <a
-              href="https://ieeexplore.ieee.org/document/11101305"
-              target="_blank"
-            >
+            <a href="https://ieeexplore.ieee.org/document/11101305" target="_blank">
               View Publication
             </a>
           </div>
         </div>
-      </motion.section>
+      </section>
+
+      {/* ================= EXTRA-CURRICULAR ================= */}
+      <section id="extra-curricular">
+        <h2>Extra-Curricular Activities 🌟</h2>
+        <div className="achievement-list">
+          <div className="achievement-card">
+            <h3>🚀 Hackathon Organizer (4 Events)</h3>
+            <p>
+              Led a 20+ member team to organize hackathons with participation of
+              3000+ students.
+            </p>
+          </div>
+
+          <div className="achievement-card">
+            <h3>🏆 Sports Fest Organizer (2 Events)</h3>
+            <p>
+              Headed a 40+ member team to organize Sangram Sports Fest with
+              1500+ participants.
+            </p>
+          </div>
+
+          <div className="achievement-card">
+            <h3>🏠 Mess & Hostel Secretary</h3>
+            <p>
+              Managed operations, budgeting, and student welfare for 500+
+              residents.
+            </p>
+          </div>
+
+          <div className="achievement-card">
+            <h3>💡 Coding Club Coordinator</h3>
+            <p>
+              Organized workshops, competitions, and guest lectures to promote a
+              strong coding culture.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* ================= CONTACT ================= */}
-<motion.section
-  id="contact"
-  initial={{ opacity: 0, y: 30 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6 }}
-  viewport={{ once: true }}
->
-  <h2>Contact Me</h2>
-
-  <ContactForm />
-
-  <p className="contact-email">
-    Email: <a href="mailto:aj5249308@gmail.com">aj5249308@gmail.com</a>
-  </p>
-</motion.section>
+      <section id="contact">
+        <h2>Contact Me</h2>
+        <ContactForm />
+        <p className="contact-email">
+          Email: <a href="mailto:aj5249308@gmail.com">aj5249308@gmail.com</a>
+        </p>
+      </section>
 
       {/* ================= FOOTER ================= */}
       <footer>

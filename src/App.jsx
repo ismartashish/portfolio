@@ -312,6 +312,11 @@ export default function App() {
             </p>
             <a href="https://traditionalfrontend.vercel.app">Check Out</a>
           </div>
+           <div className="project-card">
+            <h3>A Basic Portfolio</h3>
+            <p>Built a dynamic MERN portfolio showcasing projects, skills, and experience with smooth animations, scalable backend, and fast, production-ready deployment.</p>
+            <a href="https://ismartashish.github.io/portfolio/">Check Out</a>
+          </div>
         </div>
       </section>
 

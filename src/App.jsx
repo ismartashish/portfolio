@@ -80,7 +80,7 @@ function ContactForm() {
     };
 
     try {
-      const res = await fetch("https://new-portfolio-backend-3.onrender.com/api/contact", {
+      const res = await fetch("https://portfoliobackend-o2jr.onrender.com/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
@@ -311,6 +311,13 @@ export default function App() {
               a modern web platform.
             </p>
             <a href="https://traditionalfrontend.vercel.app">Check Out</a>
+          </div>
+          <div className="project-card">
+            <h3>Smart Resume Analyzer</h3>
+            <p>
+             An AI-powered ATS resume checker that analyzes resumes, matches them with job descriptions, and highlights missing skills using React and FastAPI.
+            </p>
+            <a href="https://ismartashish.github.io/ATSResume_frontend">Check Out</a>
           </div>
            <div className="project-card">
             <h3>A Basic Portfolio</h3>

@@ -373,11 +373,11 @@ export default function App() {
           </div>
 
           <div className="achievement-card">
-            <h3>💡 Coding Club Coordinator</h3>
-            <p>
-              Organized workshops, competitions, and guest lectures to promote a
-              strong coding culture.
-            </p>
+            <h3>💡 Chairperson – CODESTA Coding Club</h3>
+              <p>
+                Driving a vibrant tech community by leading events, events,
+                and knowledge-sharing sessions, inspiring students to push boundaries in coding and innovation.
+              </p>
           </div>
         </div>
       </section>

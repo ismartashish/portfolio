@@ -400,9 +400,7 @@ export default function App() {
           <div className="achievement-card">
            <h3>🔥 Chairperson – CODESTA Coding Club</h3>
               <p>
-                Building a community of innovators by leading events,
-                 tech events, and collaborative learning experiences
-                  that push boundaries in coding and technology.
+                Building a community of innovators by leading , tech events, and collaborative learning experiences that push boundaries in coding and technology.
               </p>
           </div>
         </div>

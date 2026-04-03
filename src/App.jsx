@@ -67,11 +67,18 @@ function Header() {
 }
 
 /* ================= CONTACT FORM ================= */
+/* ================= CONTACT FORM ================= */
 function ContactForm() {
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return;
+
+    setLoading(true);
+    setError("");
 
     const formData = {
       name: e.target[0].value,
@@ -80,19 +87,29 @@ function ContactForm() {
     };
 
     try {
-      const res = await fetch("https://new-portfolio-backend-3.onrender.com/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-      });
+      const res = await fetch(
+        "https://portfoliobackend-o2jr.onrender.com/api/contact",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData)
+        }
+      );
 
-      if (res.ok) {
+      const data = await res.json();
+
+      if (data.success) {
         setSent(true);
         e.target.reset();
         setTimeout(() => setSent(false), 4000);
+      } else {
+        setError(data.message || "Something went wrong");
       }
+
     } catch (err) {
-      console.error(err);
+      setError("Network error. Try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -105,14 +122,17 @@ function ContactForm() {
         </div>
 
         <textarea placeholder="Your Message" rows="5" required />
-        <button type="submit">Send Message</button>
+
+        <button type="submit" disabled={loading}>
+          {loading ? "Sending..." : "Send Message"}
+        </button>
       </form>
 
       {sent && <p className="success-message">✅ Message sent successfully!</p>}
+      {error && <p className="error-message">❌ {error}</p>}
     </>
   );
 }
-
 /* ================= MAIN APP ================= */
 export default function App() {
   return (
@@ -304,6 +324,7 @@ export default function App() {
             <p>MERN-based task manager with authentication and REST APIs.</p>
             <a href="https://to-do-frontend-roan-phi.vercel.app">Check Out</a>
           </div>
+          
           <div className="project-card">
             <h3>Bharat Tradition</h3>
             <p>
@@ -316,6 +337,17 @@ export default function App() {
             <h3>A Basic Portfolio</h3>
             <p>Built a dynamic MERN portfolio showcasing projects, skills, and experience with smooth animations, scalable backend, and fast, production-ready deployment.</p>
             <a href="https://ismartashish.github.io/portfolio/">Check Out</a>
+          </div>
+           <div className="project-card">
+            <h3>Smart Resume Analyzer</h3>
+            <p>An AI-powered ATS resume checker that analyzes resumes, matches them with job descriptions, and highlights missing skills using React and FastAPI.</p>
+            <a href="https://ismartashish.github.io/ATSResume_frontend">Check Out</a>
+          </div>
+           <div className="project-card">
+            <h3>AuraMail</h3>
+            <p>AuraMail – Designed and developed an automation platform that streamlines bulk certificate distribution using Gmail OAuth, CSV uploads, and auto-generated attachments.
+              Transformed a manual email workflow into a secure, single-click system with real-time tracking and backend–frontend integration.</p>
+            <a href="https://ismartashish.github.io/AuraMailer">Check Out</a>
           </div>
         </div>
       </section>
@@ -366,11 +398,12 @@ export default function App() {
           </div>
 
           <div className="achievement-card">
-            <h3>💡 Coding Club Coordinator</h3>
-            <p>
-              Organized workshops, competitions, and guest lectures to promote a
-              strong coding culture.
-            </p>
+           <h3>🔥 Chairperson – CODESTA Coding Club</h3>
+              <p>
+                Building a community of innovators by leading events,
+                 tech events, and collaborative learning experiences
+                  that push boundaries in coding and technology.
+              </p>
           </div>
         </div>
       </section>
